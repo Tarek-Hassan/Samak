@@ -1,6 +1,7 @@
 <?php
 
 /*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -12,6 +13,15 @@
 */
 // Auth::routes();
 Route::group(['prefix' => '/','middleware' => ['auth',],],function() {
-    Route::get('admin', 'GeneralController@index');
+    Route::get('admin', 'GeneralController@index')->name('admin.dashboard');
+
 });
+
+// Route::group(['prefix' => 'admin','middleware' => ['auth',],],function() {
+// Route::get('language/change/{lange}', function ($lang) {
+//     session(['lang' => $lang]);
+//     return redirect()->back();
+// })->name('language.change');
+// });
+
 
