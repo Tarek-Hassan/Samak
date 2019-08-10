@@ -96,7 +96,7 @@ class CategoryDetailsRepository
      */
 
     public function update(string $id, array $CategoryDetails)
-    {
+    {dd($CategoryDetails);
         if ($CategoryDetails['rate'] != [])
             {
                 DB::table('rate_categories')
@@ -104,17 +104,16 @@ class CategoryDetailsRepository
                 ->update(['rate' => $CategoryDetails['rate']]);
 
              }
+             if ($CategoryDetails['image'] != []) {
+                $images = Image::where('categorydetails_id',$id);
+                foreach ($images as $image) {
+                    $image->delete();
+                }
 
-        if ($CategoryDetails['image'] != []) {
-            $images = Image::where('categorydetails_id',$id);
-            foreach ($images as $image) {
-                $image->delete();
+                foreach ($CategoryDetails['image'] as $item) {
+                    Image::create(['image'=>$item,'categorydetails_id'=>$id]);
+                }
             }
-
-            foreach ($CategoryDetails['image'] as $item) {
-                Image::create(['image'=>$item,'categorydetails_id'=>$id]);
-            }
-        }
         $CategoryDetailsToUpdate = $this->CategoryDetails->find($id);
         $CategoryDetailsToUpdate->update($CategoryDetails);
         return $CategoryDetailsToUpdate->fresh();

@@ -21,28 +21,42 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                Genders
+                                {{ __('admin.edit') }}
                             </h3>
                         </div>
                     </div>
                 </div>
 
-                <form class="forms-sample col-md-9" action="{{ route('type.store') }}" method="post" enctype="multipart/form-data">
+                <form class="forms-sample col-md-9" action="{{ route('privacy.update',[$data->id]) }}" method="post" enctype="multipart/form-data">
 
                     @csrf
+                    @method('PUT')
 
-                    <div class="form-group">
-                        <label for="exampleInputName1">Gender</label>
-                        <input type="text" class="form-control" name="gender" value="{{ old('gender') }}"
-                               id="exampleInputName1"
-                               placeholder="Gender">
-                    </div>
+
+                    <div class="form-group m-form__group">
+                                                <label
+                                                    for="exampleInputPassword1">{{ __('general.bodyAr') }}</label>
+                                                <textarea name="bodyAr"
+                                                          class="summernote"
+                                                         >{{ old('body',$data['bodyAr']) }}</textarea>
+                                            </div>
+
+                    <div class="form-group m-form__group">
+                                                <label
+                                                    for="exampleInputPassword1">{{ __('general.bodyEn') }}</label>
+                                                <textarea name="bodyEn"
+                                                          class="summernote"
+                                                         >{{ old('body',$data['bodyEn']) }}</textarea>
+                                            </div>
+
+
+
 
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary mr-2">{{ __('general.submit') }}</button>
                         <button class="btn btn-light">
-                            <a href="{{route('type.index')}}"
+                            <a href="{{route('privacy.index')}}"
                                class="btn btn-secondary">
                                 {{ __('general.cancel') }}
                             </a>

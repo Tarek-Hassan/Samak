@@ -106,7 +106,7 @@ class CategoryDetailsController extends Controller
      */
     public function update(UpdateCategoryDetailsRequest $request, $id)
     {
-        //
+
         $this->CategoryDetails->update($id,$request->all());
         return redirect()->route('categorydetails.index');
     }

@@ -18,7 +18,7 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <button onclick="window.location='{{ route('type.create') }}'"
+                                <button onclick="window.location='{{ route('advrtisment.create') }}'"
                                         class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
                                     <span>
                                         <i class="la la-plus"></i>
@@ -43,8 +43,13 @@
                                     <thead>
                         <tr>
                         <th>#</th>
-                                <th>{{ __('general.type') }}</th>
-                                <th>{{ __('admin.operation') }}</th>
+
+                                <th>TitleAr</th>
+                                <th>TitleEn</th>
+                                <th>DescriptionAr</th>
+                                <th>DescriptionEn</th>
+								<th>UserName</th>
+                                <th>Operation</th>
 
                         </tr>
                         </thead>
@@ -57,11 +62,22 @@
 												</td>
 
 												<td>
-                                                {{$value->gender}}
+                                                {{$value->titleAr}}
 												</td>
-
 												<td>
-                                                <a href="type/{{$value->id}}/edit"><button type="button" class="btn btn-primary" >Edite</button></a>
+                                                {{$value->titleEn}}
+												</td>
+												<td>
+                                                {!! nl2br($value->descriptionAr)!!}
+												</td>
+												<td>
+                                                {!! nl2br($value->descriptionEn)!!}
+												</td>
+												<td>
+                                                {{$value->users->name}}
+												</td>
+												<td>
+                                                <a href="advrtisment/{{$value->id}}/edit"><button type="button" class="btn btn-primary" >Edite</button></a>
 							                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete" >Delete</button>
 												</td>
 
@@ -73,14 +89,14 @@
 					        <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
 					      </div>
 
-					       <form action="{{route('type.destroy',$value->id)}}" method="post">
+					       <form action="{{route('advrtisment.destroy',$value->id)}}" method="post">
 					        <div class="modal-body">
 					         {{method_field('delete')}}
 					     	 {{csrf_field()}}
 			          			<div>
 			            			<div class="box-body">
 			            			<p class="text-center">Are u sure want to delete?</p>
-			          					
+			          					<!-- <input type="hidden" name="post_id" id="post_id" value=""> -->
 
 			            			</div>
 			          			</div>

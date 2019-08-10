@@ -93,7 +93,7 @@
                         <label for="exampleInputEmail1">Image</label>
 
                         <div class="custom-file">
-                            <input  type="file" class="custom-file-input" id="customFile"
+                            <input  id="images" type="file" class="custom-file-input" id="customFile"
                                 name="image[]" multiple>
                             <label class="custom-file-label" for="customFile">Choose</label>
                         </div>

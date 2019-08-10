@@ -27,13 +27,13 @@
                 </div>
             </div>
 
-            <form class="forms-sample col-md-9" action="{{ route('categorydetails.update',[$data->id]) }}" method="post"
+         
+                <form class="forms-sample col-md-9" action="{{ route('categorydetails.update',[$data->id]) }}" method="post"
                 enctype="multipart/form-data">
 
                 @csrf
                 @method('PUT')
 
-                <!-- ['titleAr','titleEn','medium','large','small','discount','quantity','user_id','category_id' -->
                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                 <input type="hidden" name="rate" value="3">
                 <div class="form-group">
@@ -88,18 +88,19 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <!-- <div>
                     <div class="form-group m-form__group">
                         <label for="exampleInputEmail1">Image</label>
 
                         <div class="custom-file">
-                            <input  type="file" class="custom-file-input" id="customFile"
-                                name="image[]" multiple>
+                            <input type="file" class="custom-file-input" id="customFile" name="image[]" multiple>
                             <label class="custom-file-label" for="customFile">Choose</label>
                         </div>
+
+
                     </div>
                     <div id="image_preview"></div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -120,52 +121,64 @@
 
 @endsection
 @section('script')
+<script>
+    function display(input) {
+        if (input.files && input.files[0]) {
+            $('.flag-img').show();
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#flag')
+                    .attr('src', e.target.result)
+                    .width(50);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-        <script type="text/javascript">
-            $("#customFile").change(function () {
+</script>
+<script type="text/javascript">
+    $("#customFile").change(function () {
 
-                $('#image_preview').html("");
+        $('#image_preview').html("");
 
-                var total_file = document.getElementById("customFile").files.length;
+        var total_file = document.getElementById("customFile").files.length;
 
-                for (var i = 0; i < total_file; i++)
+        for (var i = 0; i < total_file; i++)
 
-                {
+        {
 
-                    $('#image_preview').append("<img src='" + URL.createObjectURL(event.target.files[i]) + "'>");
+            $('#image_preview').append("<img src='" + URL.createObjectURL(event.target.files[i]) + "'>");
 
-                }
+        }
 
-            });
+    });
 
-
-        </script>
+</script>
 @endsection
 @section('styles')
-    <style type="text/css">
-        input[type=file] {
+<style type="text/css">
+    input[type=file] {
 
-            display: inline;
+        display: inline;
 
-        }
+    }
 
-        #image_preview {
+    #image_preview {
 
 
 
-            padding: 10px;
+        padding: 10px;
 
-        }
+    }
 
-        #image_preview img {
+    #image_preview img {
 
-            width: 50px;
+        width: 200px;
 
-            padding: 5px;
+        padding: 5px;
 
-        }
+    }
 
-    </style>
+</style>
 @endsection
-
