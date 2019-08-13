@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/manageusers",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ManageUsers\\Providers\\ManageUsersServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ManageUsers\\": ""
+        }
+    }
+}
