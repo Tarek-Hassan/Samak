@@ -20,7 +20,6 @@ class UpdateInfoRequest extends FormRequest
             'cuttingprice'=>'required|numeric',
             'cleaningprice'=>'required|numeric',
             'cookingprice'=>'required|numeric',
-            'deliveryprice'=>'required|numeric',
 
         ];
     }

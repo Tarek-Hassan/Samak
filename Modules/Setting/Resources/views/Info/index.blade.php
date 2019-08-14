@@ -52,7 +52,7 @@
                                 <th>cuttingprice</th>
                                 <th>cleaningprice</th>
                                 <th>cookingprice</th>
-                                <th>deliveryprice</th>
+
 								<th>UserName</th>
                                 <th>Operation</th>
 
@@ -87,9 +87,7 @@
 												<td>
                                                 {{$value->cookingprice}}
 												</td>
-												<td>
-                                                {{$value->deliveryprice}}
-												</td>
+												
 												<td>
                                                 {{$value->users->name}}
 												</td>

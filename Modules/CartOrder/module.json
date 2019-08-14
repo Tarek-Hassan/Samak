@@ -1,0 +1,14 @@
+{
+    "name": "CartOrder",
+    "alias": "cartorder",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\CartOrder\\Providers\\CartOrderServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

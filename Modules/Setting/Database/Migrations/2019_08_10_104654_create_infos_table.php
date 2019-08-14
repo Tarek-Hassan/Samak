@@ -22,7 +22,6 @@ class CreateInfosTable extends Migration
             $table->string('cuttingprice');
             $table->string('cleaningprice');
             $table->string('cookingprice');
-            $table->string('deliveryprice');
             $table->Integer('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

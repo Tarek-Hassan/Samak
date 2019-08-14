@@ -15,3 +15,4 @@ Route::group(['prefix' => '/','middleware' => ['auth',],],function() {
     Route::get('admin', 'GeneralController@index');
 });
 
+

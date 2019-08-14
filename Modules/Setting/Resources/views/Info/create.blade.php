@@ -74,13 +74,7 @@
                                id="exampleInputName1"
                                placeholder="cookingprice">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputName1">deliveryprice</label>
-                        <input type="number" class="form-control" name="deliveryprice" value="{{ old('deliveryprice') }}"
-                               id="exampleInputName1"
-                               placeholder="deliveryprice">
-                    </div>
-
+                    
 
 
 
