@@ -10,4 +10,10 @@ class Order extends Model
     public function user(){
         return $this->belongsTo('App\User','user_id');
     }
+    public function payment(){
+        return $this->belongsTo('Modules\PaymentMethod\Model\PaymentMethod\PaymentMethod','payment_id');
+    }
+    protected $hidden = [
+        'created_at','updated_at',
+     ];
 }
