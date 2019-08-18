@@ -26,7 +26,7 @@ class CartRepository
 
     public function all()
     {
-        return $this->Cart->all();
+        return $this->Cart->where('user_id',auth()->user()->id)->get();
     }
     /**
      * Create a new Cart
@@ -37,6 +37,17 @@ class CartRepository
 
     public function create(array $Cart)
     {
+
+        $size=0;$quantity=$Cart['quantity'];$cooked=0;$cutting=0;$cleaned=0;
+
+        if($Cart['size']==2){$size=$Cart['large'];}else if($Cart['size']==1){$size=$Cart['medium'];} else if($Cart['size']==0){$size=$Cart['small'];}
+
+        if($Cart['cutting']==1){$cutting=$Cart['cuttingprice'];}else if($Cart['cutting']==0){$cutting=0;}
+
+                if($Cart['cleaned']==1){$cleaned=$Cart['cleaningprice'];}else if($Cart['cleaned']==0){$cleaned=0;}
+                    if($Cart['cooked']==1){$cooked=$Cart['cookingprice'];}else if($Cart['cooked']==0){$cooked=0;}
+
+        $Cart['price']=$size*$quantity+$cooked+$cutting+$cleaned;
 
         return $this->Cart->create($Cart);
 

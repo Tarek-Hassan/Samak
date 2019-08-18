@@ -21,7 +21,7 @@
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            {{ __('general.admin') }}
+                            {{ __('general.order') }}
                         </h3>
                     </div>
                 </div>
@@ -33,34 +33,79 @@
                 enctype="multipart/form-data">
 
                 @csrf
-                <div class="form-group">
-                    <label for="exampleInputName1">order_nameAr</label>
-                    <input type="text" class="form-control" name="order_nameAr" value="{{ old('order_nameAr') }}" id="exampleInputName1"
-                        placeholder="order_nameAr">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName1">order_nameEn</label>
-                    <input type="text" class="form-control" name="order_nameEn" value="{{ old('order_nameEn') }}" id="exampleInputName1"
-                        placeholder="order_nameEn">
-                </div>
+
+                @foreach($carts as $cart)
+                <input type="hidden" name="cart[]" value="{{$cart}}">
+                @endforeach
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+
+                <div class="form-group m-form__group row">
+                    <div class="col-md-10">
+                        <label for="exampleSelect1">
+                            Gender
+                        </label>
+                        <select class="form-control m-bootstrap-select m_selectpicker" required name="status">
+                            <option value="process">process
+                            </option>
+                            <option value="waiting">waiting
+                            </option>
+                            <option value="compeleted">compeleted
+                            </option>
 
 
-                <div>
-                    <div class="form-group m-form__group">
-                        <label for="exampleInputEmail1">Image</label>
-                        <div></div>
-                        <div class="custom-file">
-                            <input onchange="display(this);" type="file" class="custom-file-input" id="customFile"
-                                name="order_img">
-                            <label class="custom-file-label" for="customFile">Choose</label>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">estimatedtime</label>
+                        <div class="input-group date col-md-9" id="timepicker-example" data-target-input="nearest">
+                            <div class="input-group" data-target="#timepicker-example" data-toggle="datetimepicker">
+                                <input type="text" name="estimatedtime" id="timepicker" class="form-control "
+                                    data-target="#timepicker-example" />
+                                <div class="input-group-addon input-group-append">
+                                    <i class="la la-clock-o input-group-text"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group flag-img m-form__group" style="display:none;">
-                        <img src="#" id="flag" style="width:50px;">
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-md-10">
+                        <label for="exampleSelect1">
+                            paymentmethod
+                        </label>
+                        <select class="form-control m-bootstrap-select m_selectpicker" required name="payment_id"
+                            data-live-search="true">
+                            @foreach($payments as $payment)
+                            <option value="{{ $payment->id }}">{{ $payment->paymentmethod}}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="exampleInputName1">country</label>
+                    <input type="text" class="form-control" name="country" value="{{ old('country') }}"
+                        id="exampleInputName1" placeholder="country">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">city</label>
+                    <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="exampleInputName1"
+                        placeholder="city">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">street</label>
+                    <input type="text" class="form-control" name="street" value="{{ old('street') }}"
+                        id="exampleInputName1" placeholder="street">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">deliveryfee</label>
+                    <input type="text" class="form-control" name="deliveryfee" value="{{ old('deliveryfee') }}"
+                        id="exampleInputName1" placeholder="deliveryfee">
+                </div>
 
 
                 <div class="form-group">
@@ -83,19 +128,12 @@
 @endsection
 @section('script')
 <script>
-    function display(input) {
-        if (input.files && input.files[0]) {
-            $('.flag-img').show();
-            var reader = new FileReader();
+    $(function () {
+        $("#datepicker").datepicker();
 
-            reader.onload = function (e) {
-                $('#flag')
-                    .attr('src', e.target.result)
-                    .width(50);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+        $("#timepicker").timepicker();
+
+    });
 
 </script>
 @endsection

@@ -54,6 +54,10 @@ class OrderDetailsRepository
 
         return $this->OrderDetails->find($id);
     }
+    public function showOrderDetails(string $id)
+    {
+        return $this->OrderDetails->where('order_id',$id)->get();
+    }
 
     /**
      * Update OrderDetails with id

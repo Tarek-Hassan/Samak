@@ -37,11 +37,12 @@
                                     <th>{{ __('general.cutting') }}</th>
                                     <th>{{ __('general.cleaned') }}</th>
                                     <th>{{ __('general.categorydetailsname') }}</th>
-                                    <th>{{ __('general.username') }}</th>
+                                    <th>{{ __('general.order_id') }}</th>
                                     <th>{{ __('admin.operation') }}</th>
 
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach($data as $value)
                                 <tr>
@@ -75,7 +76,7 @@
                                     </td>
                                     <td>
 
-                                        {{$value->user->name}}
+                                        {{$value->order_id}}
                                     </td>
 
                                     <td>

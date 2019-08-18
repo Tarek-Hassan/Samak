@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
 
-    protected $fillable = ['PaymentMethod'];
+    protected $fillable = ['paymentmethod'];
 
     protected $hidden = [
        'created_at','updated_at',

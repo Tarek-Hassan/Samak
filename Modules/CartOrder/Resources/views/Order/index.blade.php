@@ -14,19 +14,7 @@
                         </h3>
                     </div>
                 </div>
-                <div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
-                        <li class="m-portlet__nav-item">
-                            <button onclick="window.location='{{ route('order.create') }}'"
-                                class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
-                                <span>
-                                    <i class="la la-plus"></i>
-                                    <span>{{ __('admin.add') }}</span>
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
             <!--  -->
             <!--begin::Portlet-->
@@ -42,9 +30,14 @@
 
                                     <tr>
                                         <th>#</th>
-                                        <th>{{ __('general.order_img') }}</th>
-                                        <th>{{ __('general.order_nameAr') }}</th>
-                                        <th>{{ __('general.order_nameEn') }}</th>
+                                        <th>{{ __('general.status') }}</th>
+                                        <th>{{ __('general.estimatedtime') }}</th>
+                                        <th>{{ __('general.country') }}</th>
+                                        <th>{{ __('general.city') }}</th>
+                                        <th>{{ __('general.street') }}</th>
+                                        <th>{{ __('general.deliveryfee') }}</th>
+                                        <th>{{ __('general.paymentMethod') }}</th>
+                                        <th>{{ __('general.userName') }}</th>
                                         <th>{{ __('admin.operation') }}</th>
 
                                     </tr>
@@ -57,21 +50,45 @@
                                             {{$value->id}}
                                         </td>
                                         <td>
-                                            <img src="{{ asset('storage/'.$value->order_img) }}" id="flag"
-                                                style="width:50px;">
+                                            {{$value->status}}
+                                        </td>
+
+
+                                        <td>
+                                            {{$value->estimatedtime}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->country}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->city}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->street}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->deliveryfee}}
+                                        </td>
+                                        <td>
+
+                                        <a href="orderdetails/{{$value->id}}"><button type="button"
+                                                    class="btn btn-primary">{{count($value->orderdetails)}}</button></a>
+                                        </td>
+                                        <td>
+
+                                            {{$value->payment->paymentmethod}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->user->name}}
                                         </td>
 
                                         <td>
-                                            {{$value->order_nameAr}}
-                                        </td>
-                                        <td>
 
-                                            {{$value->order_nameEn}}
-                                        </td>
-
-                                        <td>
-                                            <a href="order/{{$value->id}}/edit"><button type="button"
-                                                    class="btn btn-primary">Edite</button></a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                                 data-target="#delete">Delete</button>
                                         </td>

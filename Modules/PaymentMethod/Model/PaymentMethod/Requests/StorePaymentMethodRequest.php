@@ -13,7 +13,7 @@ class StorePaymentMethodRequest extends FormRequest
     public function rules()
     {
         return [
-            'PaymentMethod'=>'required|string|max:190',
+            'paymentmethod'=>'required|string|max:190',
         ];
     }
 }

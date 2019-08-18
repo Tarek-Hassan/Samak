@@ -5,35 +5,57 @@ namespace Modules\CartOrder\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CartOrder\Model\Cart\Repositories\CartRepository;
+use Modules\Category\Model\CategoryDetails\Repositories\CategoryDetailsRepository;
+use Modules\Setting\Model\Info\Repositories\InfoRepository;
+use Modules\CartOrder\Model\Cart\Requests\StoreCartRequest;
+use Modules\CartOrder\Model\Cart\Requests\UpdateCartRequest;
 
 class CartController extends Controller
 {
+    private $Cart,$CategoryDetails,$setting;
+    /**
+     * UserRepository constructor.
+     * @param Cart $Cart
+     */
+    public function __construct(CartRepository $Cart,CategoryDetailsRepository $CategoryDetails,InfoRepository $setting)
+    {
+        $this->Cart = $Cart;
+        $this->CategoryDetails = $CategoryDetails;
+        $this->setting = $setting;
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('cartorder::index');
-    }
+        $data=$this->Cart->all();
+        return view('cartorder::Cart.index',compact('data'));
 
+    }
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
-    {
-        return view('cartorder::create');
-    }
+
+    // public function create()
+    // {
+    //     // $types=$this->type->all();
+    //     return view('cartorder::Cart.create');
+    // }
+
+
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreCartRequest $request)
     {
-        //
+        $this->Cart->create($request->all());
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -43,7 +65,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        return view('cartorder::show');
+        return view('cartorder::Cart.show');
     }
 
     /**
@@ -53,7 +75,10 @@ class CartController extends Controller
      */
     public function edit($id)
     {
-        return view('cartorder::edit');
+
+        $data=$this->CategoryDetails->find($id);
+        $setting=$this->setting->all();
+        return view('cartorder::Cart.create',compact('data','setting'));
     }
 
     /**
@@ -62,9 +87,12 @@ class CartController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCartRequest $request, $id)
     {
+
         //
+        $this->Cart->update($id,$request->all());
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -75,5 +103,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+        $this->Cart->delete($id);
+        return redirect()->route('cart.index');
     }
 }

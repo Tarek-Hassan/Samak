@@ -1,6 +1,7 @@
 <?php
 namespace Modules\CartOrder\Model\Order\Repositories;
 use Modules\CartOrder\Model\Order\Order;
+use Modules\CartOrder\Model\OrderDetails\Repositories\OrderDetailsRepository;
 
 
 class OrderRepository
@@ -8,14 +9,15 @@ class OrderRepository
     /**
      * @var Order
      */
-    private $Order;
+    private $Order,$OrderDetails;
     /**
      * UserRepository constructor.
      * @param Order $Order
      */
-    public function __construct(Order $Order)
+    public function __construct(Order $Order,OrderDetailsRepository $OrderDetails)
     {
         $this->Order = $Order;
+        $this->OrderDetails = $OrderDetails;
         // $this->Cat = $Cat;
     }
     /**
@@ -37,8 +39,14 @@ class OrderRepository
 
     public function create(array $Order)
     {
+        // dd($Order);
+        $order=$this->Order->create($Order);
 
-        return $this->Order->create($Order);
+        foreach ($Order['cart'] as $carts) {
+            $cart=json_decode($carts,true);
+            $this->OrderDetails->create(['quantity'=>$cart['quantity'],'price'=>$cart['price'],'size'=>$cart['size'],'cooked'=>$cart['cooked'],'cutting'=>$cart['cutting'],'cleaned'=>$cart['cleaned'],'categorydetails_id'=>$cart['categorydetails_id'],'order_id'=>$order->id]);
+        }
+        return $order;
 
     }
 
@@ -51,7 +59,6 @@ class OrderRepository
      */
     public function find(string $id)
     {
-
         return $this->Order->find($id);
     }
 

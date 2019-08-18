@@ -17,5 +17,5 @@
 Route::group(['prefix' => 'admin','middleware' => ['auth',],],function() {
     Route::resource('cart', 'CartController');
     Route::resource('order', 'OrderController');
-
+    Route::resource('orderdetails', 'OrderDetailsController');
 });

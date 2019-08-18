@@ -5,35 +5,58 @@ namespace Modules\CartOrder\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CartOrder\Model\Cart\Repositories\CartRepository;
+use Modules\PaymentMethod\Model\PaymentMethod\Repositories\PaymentMethodRepository;
+use Modules\CartOrder\Model\Order\Repositories\OrderRepository;
+use Modules\CartOrder\Model\Order\Requests\StoreOrderRequest;
+use Modules\CartOrder\Model\Order\Requests\UpdateOrderRequest;
 
 class OrderController extends Controller
 {
+    private $Order,$cart,$payment;
+    /**
+     * UserRepository constructor.
+     * @param Order $Order
+     */
+    public function __construct(OrderRepository $Order,CartRepository $cart,PaymentMethodRepository $payment)
+    {
+        $this->Order = $Order;
+        $this->cart = $cart;
+        $this->payment = $payment;
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('cartorder::index');
-    }
+        $data=$this->Order->all();
+        return view('cartorder::Order.index',compact('data'));
 
+    }
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
+
     public function create()
     {
-        return view('cartorder::create');
+         $carts=$this->cart->all();
+         $payments=$this->payment->all();
+        return view('cartorder::Order.create',compact('carts','payments'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        //
+        $this->Order->create($request->all());
+        return redirect()->route('order.index');
     }
 
     /**
@@ -43,7 +66,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('cartorder::show');
+        return view('cartorder::Order.show');
     }
 
     /**
@@ -53,7 +76,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('cartorder::edit');
+
+        $data=$this->CategoryDetails->find($id);
+        $setting=$this->setting->all();
+        return view('cartorder::Order.create',compact('data','setting'));
     }
 
     /**
@@ -62,9 +88,12 @@ class OrderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderRequest $request, $id)
     {
+
         //
+        $this->Order->update($id,$request->all());
+        return redirect()->route('order.index');
     }
 
     /**
@@ -75,5 +104,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+        $this->Order->delete($id);
+        return redirect()->route('order.index');
     }
 }

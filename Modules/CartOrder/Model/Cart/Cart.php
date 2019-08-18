@@ -10,4 +10,10 @@ class Cart extends Model
     public function user(){
         return $this->belongsTo('App\User','user_id');
     }
+    public function categoryDetails(){
+        return $this->belongsTo('Modules\Category\Model\CategoryDetails\CategoryDetails','categorydetails_id');
+    }
+    protected $hidden = [
+        'created_at','updated_at',
+     ];
 }

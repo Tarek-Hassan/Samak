@@ -13,9 +13,11 @@ class StoreOrderDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'OrderDetails_img'=>'nullable',
-            'OrderDetails_nameAr'=>'required|string|max:190',
-            'OrderDetails_nameEn'=>'required|string|max:190',
+            'quantity'=>'required|numeric',
+            'size'=>'required|numeric',
+            'cooked'=>'required|numeric',
+            'cutting'=>'required|numeric',
+            'cleaned'=>'required|numeric',
         ];
     }
 }

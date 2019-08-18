@@ -50,7 +50,7 @@
                                         <th>{{ __('general.MediumPrice') }}</th>
                                         <th>{{ __('general.SmallPrice') }}</th>
                                         <th>{{ __('general.discount') }}</th>
-                                        
+
                                         <th>{{ __('general.userName') }}</th>
                                         <th>{{ __('general.Product') }}</th>
                                         <th>{{ __('admin.operation') }}</th>
@@ -116,6 +116,8 @@
 
                                             <a href="categorydetails/{{$value->id}}/edit"><button type="button"
                                                     class="btn btn-primary">Edite</button></a>
+                                            <a href="cart/{{$value->id}}/edit"><button type="button"
+                                                    class="btn">Cart</button></a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                                 data-target="#delete">Delete</button>
                                         </td>

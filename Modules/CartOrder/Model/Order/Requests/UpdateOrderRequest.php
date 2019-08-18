@@ -13,9 +13,12 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'Order_img'=>'nullable',
-            'Order_nameAr'=>'required|string|max:190',
-            'Order_nameEn'=>'required|string|max:190',
+            'status'=>'required|string|max:190',
+            'estimatedtime'=>'required|string|max:190',
+            'country'=>'required|string|max:190',
+            'city'=>'required|string|max:190',
+            'street'=>'required|string|max:190',
+            'deliveryfee'=>'required|numeric',
         ];
     }
 }
