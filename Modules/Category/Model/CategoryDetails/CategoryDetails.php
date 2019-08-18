@@ -14,7 +14,7 @@ class CategoryDetails extends Model
     public function user(){
         return $this->belongsTo('App\User','user_id');
     }
-
+    // EWDSXZDSA
 
     public function image(){
         return $this->hasMany('Modules\Category\Entities\image','categorydetails_id');
