@@ -117,7 +117,7 @@
                 </div>
             </div>
             <!--end::Section-->
-            <center>
+            
                 <div class="m-portlet__head-tools">
 
 
@@ -130,7 +130,7 @@
                             </button>
 
                 </div>
-            </center>
+
             <!--  -->
         </div>
     </div>
