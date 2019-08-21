@@ -28,7 +28,7 @@
 		<link href="{{asset('control')}}/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="{{asset('control')}}/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
-		<link rel="shortcut icon" href="{{asset('control')}}/assets/demo/default/media/img/logo/favicon.ico" />
+		<link rel="shortcut icon" href="{{asset('control')}}/assets/demo/default/media/img/logo/Icons-Land-Multiple-Smiley-Fish-Movie.ico" />
 
 
 		    @yield('styles')
