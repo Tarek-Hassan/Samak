@@ -112,7 +112,7 @@
                                         <label for="">cooked   {{$setting->cookingprice}}</label>
                                         <div class="m-radio-inline" style="padding-top: 20px;">
                                             <label class="m-radio">
-                                                <input type="radio"  name="cooked" value="1">cooked    
+                                                <input type="radio"  name="cooked" value="1">cooked
                                                 <input type="hidden" name="cookingprice" value="{{$setting->cookingprice}}">
                                                 <span></span>
                                             </label>

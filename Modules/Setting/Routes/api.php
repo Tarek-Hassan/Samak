@@ -19,4 +19,4 @@ use Illuminate\Http\Request;
 Route::get('/aboutus', 'APISettingController@aboutus')->name('aboutus.aboutus');
 Route::get('/advrtisment', 'APISettingController@advrtisment')->name('advrtisment.advrtisment');
 Route::get('/privacy', 'APISettingController@privacy')->name('privacy.privacy');
-Route::get('/info', 'APISettingController@info')->name('info.info');
+Route::get('/contact', 'APISettingController@contact')->name('contact.contact');

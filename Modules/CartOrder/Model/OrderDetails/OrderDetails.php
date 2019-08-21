@@ -15,6 +15,6 @@ class OrderDetails extends Model
         return $this->belongsTo('Modules\CartOrder\Model\Order\Order','order_id');
     }
     protected $hidden = [
-        'created_at','updated_at',
+        'created_at','updated_at','categorydetails_id','order_id'
      ];
 }

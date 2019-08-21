@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUsers extends Migration
+class AddTotalpriceToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class AddRoleToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
-            $table->string('role')->defualt('user');
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->string('street')->nullable();
+            $table->string('totalprice')->nullable();
         });
     }
 
@@ -29,7 +26,7 @@ class AddRoleToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
         });
     }

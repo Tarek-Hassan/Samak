@@ -19,6 +19,7 @@ class StoreManageUsersRequest extends FormRequest
             'country' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'street' => 'nullable|string|max:255',
+            'phone'=>'nullable|numeric',
             'avatar'=>'nullable',
 
 

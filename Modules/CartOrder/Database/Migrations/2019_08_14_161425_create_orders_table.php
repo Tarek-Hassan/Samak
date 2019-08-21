@@ -15,12 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('status');
-            $table->string('estimatedtime');
+            $table->string('status')->nullable();
+            $table->string('estimatedtime')->nullable();
             $table->string('country');
             $table->string('city');
             $table->string('street');
-            $table->string('deliveryfee');
+            $table->string('deliveryfee')->nullable();
             $table->Integer('payment_id');
             $table->foreign('payment_id')->references('id')->on('payment');
             $table->Integer('user_id');

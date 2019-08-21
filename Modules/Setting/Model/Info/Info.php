@@ -10,5 +10,8 @@ class Info extends Model
     public function users(){
         return $this->belongsTo('App\User','user_id');
     }
+    protected $hidden = [
+        'created_at','updated_at','user_id','id'
+     ];
 }
 

@@ -117,8 +117,8 @@
                 </div>
             </div>
             <!--end::Section-->
-            
-                <div class="m-portlet__head-tools">
+<!-- button to testsend data fromCart to the orders   -->
+                <!-- <div class="m-portlet__head-tools">
 
 
                             <button onclick="window.location='{{ route('order.create') }}'"
@@ -129,7 +129,7 @@
                                 </span>
                             </button>
 
-                </div>
+                </div> -->
 
             <!--  -->
         </div>

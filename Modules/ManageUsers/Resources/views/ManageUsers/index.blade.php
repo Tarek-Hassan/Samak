@@ -47,6 +47,7 @@
                                 <th>Image</th>
 								<th>UserName</th>
 								<th>Email</th>
+								<th>phone</th>
                                 <th>Role</th>
 								<th>Country</th>
 								<th>City</th>
@@ -70,6 +71,9 @@
 												</td>
 												<td>
                                                 {{$value->email}}
+												</td>
+												<td>
+                                                {{$value->phone}}
 												</td>
 												<td>
                                                 {{$value->role}}

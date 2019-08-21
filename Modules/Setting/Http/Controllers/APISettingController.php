@@ -46,9 +46,9 @@ class APISettingController extends Controller
         $privacy= $this->privacy->all();
         return response()->json($privacy);
     }
-    public function info()
+    public function contact()
     {
-        $info= $this->info->all();
+        $info= $this->info->contact();
         return response()->json($info);
     }
 

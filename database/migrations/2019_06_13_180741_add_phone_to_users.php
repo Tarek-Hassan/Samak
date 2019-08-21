@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUsers extends Migration
+class AddPhoneToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,8 @@ class AddRoleToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('role')->defualt('user');
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->string('street')->nullable();
+            $table->string('phone')->nullable();
+        
         });
     }
 

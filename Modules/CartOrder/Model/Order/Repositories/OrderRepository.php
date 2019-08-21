@@ -2,6 +2,7 @@
 namespace Modules\CartOrder\Model\Order\Repositories;
 use Modules\CartOrder\Model\Order\Order;
 use Modules\CartOrder\Model\OrderDetails\Repositories\OrderDetailsRepository;
+use Modules\CartOrder\Model\Cart\Repositories\CartRepository;
 
 
 class OrderRepository
@@ -9,14 +10,15 @@ class OrderRepository
     /**
      * @var Order
      */
-    private $Order,$OrderDetails;
+    private $Order,$OrderDetails,$Cart;
     /**
      * UserRepository constructor.
      * @param Order $Order
      */
-    public function __construct(Order $Order,OrderDetailsRepository $OrderDetails)
+    public function __construct(CartRepository $Cart,Order $Order,OrderDetailsRepository $OrderDetails)
     {
         $this->Order = $Order;
+        $this->Cart = $Cart;
         $this->OrderDetails = $OrderDetails;
         // $this->Cat = $Cat;
     }
@@ -28,8 +30,19 @@ class OrderRepository
 
     public function all()
     {
-        return $this->Order->all();
+        return $this->Order->with('orderdetails')->get();
     }
+
+    public function allorders(string $id)
+    {
+        return $this->Order->where('user_id',$id)->with('orderdetails')->get();
+    }
+
+    public function searchorder(string $id)
+    {
+        return $this->Order->where('status',$id)->with('orderdetails')->get();
+    }
+   
     /**
      * Create a new Order
      *
@@ -40,13 +53,39 @@ class OrderRepository
     public function create(array $Order)
     {
         // dd($Order);
+
         $order=$this->Order->create($Order);
+
+
 
         foreach ($Order['cart'] as $carts) {
             $cart=json_decode($carts,true);
+            $Order['totalprice']+=$cart['price'];
             $this->OrderDetails->create(['quantity'=>$cart['quantity'],'price'=>$cart['price'],'size'=>$cart['size'],'cooked'=>$cart['cooked'],'cutting'=>$cart['cutting'],'cleaned'=>$cart['cleaned'],'categorydetails_id'=>$cart['categorydetails_id'],'order_id'=>$order->id]);
         }
         return $order;
+        // return $Order;
+
+    }
+
+
+
+
+
+    public function createapi(array $Order)
+    {
+        // dd($Order);
+        $order=$this->Order->create($Order);
+        $cart=$this->Cart->allData($Order['user_id']);
+
+
+        foreach ($cart as $carts) {
+            $cart=json_decode($carts,true);
+            $order['totalprice']+=$cart['price'];
+            $this->OrderDetails->create(['quantity'=>$cart['quantity'],'price'=>$cart['price'],'size'=>$cart['size'],'cooked'=>$cart['cooked'],'cutting'=>$cart['cutting'],'cleaned'=>$cart['cleaned'],'categorydetails_id'=>$cart['categorydetails_id'],'order_id'=>$order->id]);
+        }
+        return $order;
+        // return $Order;
 
     }
 

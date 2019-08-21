@@ -15,7 +15,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->Integer('categorydetails_id');
             $table->foreign('categorydetails_id')->references('id')->on('categoryDetails');
             $table->timestamps();

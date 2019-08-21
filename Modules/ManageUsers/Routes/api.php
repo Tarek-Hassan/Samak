@@ -17,10 +17,18 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 // Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/manageusers', 'ApiManageUsersController@all')->name('manageusers.all');
-    Route::post('/manageusers', 'ApiManageUsersController@store')->name('manageusers.store');
-    Route::get('/manageusers/{id}', 'ApiManageUsersController@show')->name('manageusers.show');
-    Route::put('/manageusers/{id}', 'ApiManageUsersController@update')->name('manageusers.update');
+    // Route::get('/manageusers', 'ApiManageUsersController@all')->name('manageusers.all');
+    // Route::post('/manageusers', 'ApiManageUsersController@store')->name('manageusers.store');
+    // Route::get('/manageusers/{id}', 'ApiManageUsersController@show')->name('manageusers.show');
     Route::delete('/manageusers/{id}', 'ApiManageUsersController@destroy')->name('manageusers.destroy');
     // });
-    // Route::get('/manageusers', 'ApiManageUsersController@all')->name('manageusers.all');
+    // Route::get('/userinfo', 'ApiUserController@GetUserInfo');
+    // Route::post('/updateprofile', 'ApiUserController@UpdateProfile');
+    // Route::post('/changepassword', 'ApiUserController@ChangePassword');
+    Route::post('login', 'ApiManageUsersController@Login');
+    Route::post('register', 'ApiManageUsersController@Register');
+    Route::put('/manageusers/{id}', 'ApiManageUsersController@update')->name('manageusers.update');
+
+
+
+   

@@ -14,6 +14,6 @@ class Cart extends Model
         return $this->belongsTo('Modules\Category\Model\CategoryDetails\CategoryDetails','categorydetails_id');
     }
     protected $hidden = [
-        'created_at','updated_at',
+        'created_at','updated_at','user_id'
      ];
 }

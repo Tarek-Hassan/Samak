@@ -38,7 +38,7 @@
                 <input type="hidden" name="cart[]" value="{{$cart}}">
                 @endforeach
                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-
+                <input type="hidden" name="totalprice" value="">
                 <div class="form-group m-form__group row">
                     <div class="col-md-10">
                         <label for="exampleSelect1">

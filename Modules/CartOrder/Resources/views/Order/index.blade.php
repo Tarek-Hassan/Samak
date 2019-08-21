@@ -35,6 +35,7 @@
                                         <th>{{ __('general.country') }}</th>
                                         <th>{{ __('general.city') }}</th>
                                         <th>{{ __('general.street') }}</th>
+                                        <th>{{ __('general.totalprice') }}</th>
                                         <th>{{ __('general.deliveryfee') }}</th>
                                         <th>{{ __('general.paymentMethod') }}</th>
                                         <th>{{ __('general.userName') }}</th>
@@ -68,6 +69,10 @@
                                         <td>
 
                                             {{$value->street}}
+                                        </td>
+                                        <td>
+
+                                            {{$value->totalprice}}
                                         </td>
                                         <td>
 

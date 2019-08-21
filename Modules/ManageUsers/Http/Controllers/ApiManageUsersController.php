@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\ManageUsers\Model\ManageUsers\Repositories\ManageUsersRepository;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Auth;
+
 
 class ApiManageUsersController extends Controller
 {
@@ -62,6 +66,84 @@ class ApiManageUsersController extends Controller
         ]);
     }
 
+
+    public function Login()
+    {
+        $url = url('/');
+        $rules = [
+            'name' => 'required',
+            'password' => 'required',
+        ];
+
+        $Validator = Validator::make(request()->all(), $rules);
+        if ($Validator->fails()) {
+            return response()->json(['status' => false, 'messages' => $Validator->messages()]);
+        } else {
+
+            if (filter_var(request('name'), FILTER_VALIDATE_EMAIL)) {
+                if (Auth::attempt(['email' => request('name'), 'password' => request('password') /* , 'active' => 1 */])) {
+                    $user = Auth::user();
+                    $user->apitoken = str_random(80);
+                    $user->save();
+
+                    $userinfo =$Users= $this->User->find($user->id);
+
+                    return response(['status' => true, 'user' => $userinfo, 'token' => $user->apitoken]);
+                } else {
+                    return response(['status' => false, 'message' => 'Username Or Password Incorrect']);
+                }
+            } else {
+                if (Auth::attempt(['name' => request('name'), 'password' => request('password') /* , 'active' => 1 */])) {
+                    $user = Auth::user();
+                    $user->apitoken = str_random(80);
+                    $user->save();
+                    $userinfo =$Users= $this->User->find($user->id);
+                    return response(['status' => true, 'user' => $userinfo, 'token' => $user->apitoken]);
+                } else {
+                    return response(['status' => false, 'message' => 'Username Or Password Incorrect']);
+                }
+            }
+        }
+    }
+    /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function Register()
+    {
+        $rules = [
+            'name' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+
+        ];
+
+        $Validator = Validator::make(request()->all(), $rules);
+        if ($Validator->fails()) {
+            return response()->json(['status' => false, 'messages' => $Validator->messages()]);
+        } else {
+            try {
+                $apitoken = str_random(80);
+                $user = $this->User->create([
+                    'name' => request('name'),
+                    'email' => request('email'),
+                    'country' => request('country'),
+                    'city' => request('city'),
+                    'phone' => request('phone'),
+                    'street' => request('street'),
+                    'avatar' => request('avatar'),
+                    'apitoken' => $apitoken,
+                    'password' => bcrypt(request('password')),
+                ]);
+                $url = url('/');
+                $userinfo= $this->User->find($user->id);
+                return response(['status' => true, 'user' => $userinfo, 'token' => $apitoken]);
+            } catch (Exception $ex) {
+                return response()->json(['status' => false, 'messages' => 'Invalid Information']);
+            }
+        }
+    }
     /**
      * Show the specified resource.
      * @param int $id
@@ -93,15 +175,11 @@ class ApiManageUsersController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update($id,UpdateUserRequest $request )
+    public function update($id,Request $request )
     {
         //
-
         $Users= $this->User->update($id,$request->all());
-        return response()->json([
-            'message' => ' updated! ',
-            'User' => $Users
-        ]);
+        return response()->json($Users);
     }
 
     /**

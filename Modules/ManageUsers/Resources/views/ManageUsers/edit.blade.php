@@ -55,6 +55,24 @@
                         placeholder="ConfirmPassword">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputName1">phone</label>
+                    <input type="text" class="form-control" name="phone" value="{{ old('phone', $data['phone']??'') }}"
+                        id="exampleInputphone1" placeholder="phone">
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-md-10">
+                        <label for="exampleSelect1">
+                            Role
+                        </label>
+                        <select class="form-control m-bootstrap-select m_selectpicker" required name="role">
+                            <option {{ $data->role == 'admin' ? 'selected' : '' }} value="admin" >admin</option>
+                            <option {{ $data->role == 'user' ? 'selected' : '' }} value="user" >user </option>
+                            <option {{ $data->role == 'owner' ? 'selected' : '' }} value="owner" >owner</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="exampleInputName1">country</label>
                     <input type="text" class="form-control" name="country" value="{{ old('country', $data['country']??'') }}"
                         id="exampleInputcountry1" placeholder="country">

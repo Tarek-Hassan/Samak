@@ -1,12 +1,16 @@
 <?php
 
-namespace Modules\Category\Http\Controllers;
+namespace Modules\CartOrder\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CartOrder\Model\Order\Repositories\OrderRepository;
 use Modules\Category\Model\CategoryDetails\Repositories\CategoryDetailsRepository;
-class ApiCategoryDetailsController extends Controller
+use Modules\CartOrder\Model\OrderDetails\Repositories\OrderDetailsRepository;
+use Modules\Setting\Model\Info\Repositories\InfoRepository;
+
+class ApiOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,29 +18,48 @@ class ApiCategoryDetailsController extends Controller
      */
 
 
-    private $CategoryDetails;
+    private $Order;
     /**
      * UserRepository constructor.
      * @param User $User
      */
-    public function __construct(CategoryDetailsRepository $CategoryDetails)
+    public function __construct(OrderRepository $Order,CategoryDetailsRepository $CategoryDetails,InfoRepository $setting,OrderDetailsRepository $orderdetails)
     {
+        $this->Order = $Order;
         $this->CategoryDetails = $CategoryDetails;
+        $this->setting = $setting;
+        $this->orderdetails = $orderdetails;
     }
 
 
 
     public function all()
     {
-        // $CategoryDetails= $this->CategoryDetails->all();
-        $CategoryDetails= $this->CategoryDetails->allData();
-        return response()->json($CategoryDetails);
+        $Order= $this->Order->all();
+        return response()->json($Order);
+    }
+
+    public function myorder($id)
+    {
+        $Order= $this->Order->allorders($id);
+        return response()->json($Order);
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
+    public function searchorder($id)
+    {
+        $Order= $this->Order->searchorder($id);
+        return response()->json($Order);
+    }
+
+    public function orderdetails($id)
+    {
+        $orderdetails= $this->orderdetails->showOrderDetails($id);
+        return response()->json($orderdetails);
+    }
 
 
     /**
@@ -46,21 +69,11 @@ class ApiCategoryDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $CategoryDetails= $this->CategoryDetails->create($request->all());
-        return response()->json([
-            'message' => ' success! ',
-            'CategoryDetails' => $CategoryDetails
-        ]);
-    }
 
-    public function addRate($id,Request $request)
-    {
-        //
-        $rate= $this->CategoryDetails->addRate($id,$request->all());
-        return response()->json([
-            'message' => $rate,
-        ]);
+        $Order= $this->Order->createapi($request->all());
+
+
+        return response()->json($Order);
     }
 
     /**
@@ -70,8 +83,9 @@ class ApiCategoryDetailsController extends Controller
      */
     public function show($id)
     {
-        $CategoryDetails= $this->CategoryDetails->find($id);
-        return response()->json($CategoryDetails);
+        $categoryDetails=$this->CategoryDetails->findcategoryDetails($id);
+        $setting=$this->setting->info();
+        return response()->json([$categoryDetails,$setting]);
     }
 
     /**
@@ -89,11 +103,9 @@ class ApiCategoryDetailsController extends Controller
     public function update($id,Request $request )
     {
         //
-
-        $CategoryDetails= $this->CategoryDetails->update($id,$request->all());
+        $Order= $this->Order->update($id,$request->all());
         return response()->json([
-            'message' => ' updated! ',
-            'CategoryDetails' => $CategoryDetails
+            '$Order' => $Order
         ]);
     }
 
@@ -106,7 +118,7 @@ class ApiCategoryDetailsController extends Controller
     {
         //
 
-        $this->CategoryDetails->delete($id);
+        $this->Order->delete($id);
         return response()->json([
             'message' => 'Successfully deleted !'
         ]);

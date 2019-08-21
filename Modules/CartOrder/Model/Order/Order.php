@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['status','estimatedtime','country','city','street','deliveryfee','payment_id','user_id'];
+    protected $fillable = ['status','estimatedtime','country','city','street','totalprice','deliveryfee','payment_id','user_id'];
     public function user(){
         return $this->belongsTo('App\User','user_id');
     }
@@ -17,6 +17,6 @@ class Order extends Model
         return $this->hasMany('Modules\CartOrder\Model\OrderDetails\OrderDetails','order_id');
     }
     protected $hidden = [
-        'created_at','updated_at',
+        'created_at','updated_at','user_id'
      ];
 }

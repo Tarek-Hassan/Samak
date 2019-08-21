@@ -13,7 +13,7 @@
 		>
 		<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 
-			<li class="m-menu__section">
+			<li class="m-menu__section flaticon-technology">
 				<h4 class="m-menu__section-text">
 					{{__('general.dashbord')}}
 				</h4>
@@ -22,7 +22,7 @@
             {{--@ tarek 8/7/2019 Start:Category&&CategoryDetails MOdule--}}
 			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{ route('category.index') }}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon fa fa-cube"></i>
 					<span class="m-menu__link-text">
 						{{__('general.products')}}
 					</span>
@@ -31,7 +31,7 @@
 			</li>
 			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{ route('categorydetails.index') }}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon fa fa-cubes"></i>
 					<span class="m-menu__link-text">
 						{{__('general.productsDetalis')}}
 					</span>
@@ -42,7 +42,7 @@
             {{--@ tarek 8/8/2019 Start:Setting MOdule--}}
 			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon fa fa-gear"></i>
 					<span class="m-menu__link-text">
 						Setting
 					</span>
@@ -99,7 +99,7 @@
 			{{--@ tarek 8/8/2019 Start:ManageUsers MOdule--}}
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{route('manageusers.index')}}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon flaticon-profile-1"></i>
 					<span class="m-menu__link-text">
 						ManageUsers
 					</span>
@@ -111,7 +111,7 @@
 			{{--@ tarek 8/8/2019 Start:PaymentMethod MOdule--}}
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{route('paymentmethod.index')}}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon fa fa-credit-card-alt"></i>
 					<span class="m-menu__link-text">
 						PaymentMethod
 					</span>
@@ -121,21 +121,21 @@
 			</li>
 			{{--@ tarek 8/8/2019 End:PaymentMethod MOdule--}}
 			{{--@ tarek 8/8/2019 Start:Cart MOdule--}}
-            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+            <!-- <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{route('cart.index')}}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon fa fa-cart-plus"></i>
 					<span class="m-menu__link-text">
 						Cart
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
 
-			</li>
+			</li> -->
 			{{--@ tarek 8/8/2019 End:Cart MOdule--}}
 			{{--@ tarek 8/8/2019 Start:Order MOdule--}}
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="{{route('order.index')}}" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
+					<i class="m-menu__link-icon flaticon-diagram"></i>
 					<span class="m-menu__link-text">
 						Order
 					</span>
@@ -149,7 +149,7 @@
 				<a class="m-menu__link m-menu__toggle" href="{{ route('logout') }}"
 				onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();">
-				<i class="m-menu__link-icon flaticon-share"></i>
+				<i class="m-menu__link-icon fa fa-power-off"></i>
 				<span class="m-menu__link-text">
 					Logout
 				</span>

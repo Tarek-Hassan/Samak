@@ -16,3 +16,4 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/paymentmethod', function (Request $request) {
     return $request->user();
 });
+Route::get('/paymentmethod', 'ApiPaymentMethodController@all')->name('paymentmethod.all');

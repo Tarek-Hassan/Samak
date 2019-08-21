@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','apitoken', 'role', 'country', 'city', 'street',
+        'name', 'email', 'password','apitoken', 'role', 'country', 'city', 'street','phone'
     ];
     protected static $imageFields = [
         'avatar',

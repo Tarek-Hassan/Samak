@@ -10,4 +10,7 @@ class Advrtisment extends Model
     public function users(){
         return $this->belongsTo('App\User','user_id');
     }
+    protected $hidden = [
+        'created_at','updated_at','id'
+     ];
 }

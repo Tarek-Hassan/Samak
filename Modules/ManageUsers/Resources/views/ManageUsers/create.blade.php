@@ -29,7 +29,7 @@
 
             <form class="forms-sample col-md-9" action="{{ route('manageusers.store') }}" method="post"
                 enctype="multipart/form-data">
-               
+
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputName1">Name</label>
@@ -52,9 +52,26 @@
                         placeholder="ConfirmPassword">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputName1">phone</label>
+                    <input type="number" class="form-control" name="phone" value="{{ old('phone') }}"
+                        id="exampleInputphone1" placeholder="phone">
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-md-10">
+                        <label for="exampleSelect1">
+                            Role
+                        </label>
+                        <select class="form-control m-bootstrap-select m_selectpicker" required name="role">
+                            <option value="admin">admin</option>
+                            <option value="user">user </option>
+                            <option value="owner">owner</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="exampleInputName1">country</label>
-                    <input type="text" class="form-control" name="country" value="{{ old('country') }}" id="exampleInputcountry1"
-                        placeholder="country">
+                    <input type="text" class="form-control" name="country" value="{{ old('country') }}"
+                        id="exampleInputcountry1" placeholder="country">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">city</label>
@@ -63,8 +80,8 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">street</label>
-                    <input type="text" class="form-control" name="street" value="{{ old('street') }}" id="exampleInputstreet1"
-                        placeholder="street">
+                    <input type="text" class="form-control" name="street" value="{{ old('street') }}"
+                        id="exampleInputstreet1" placeholder="street">
                 </div>
 
 

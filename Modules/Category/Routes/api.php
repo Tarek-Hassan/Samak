@@ -14,10 +14,8 @@
 // Route::middleware('auth:api')->get('/category', function (Request $request) {
 //     return $request->user();
 // });
-// // type
-// Route::get('/type', 'ApiTypeController@all')->name('type.all');
-// Route::get('/type/{id}', 'ApiTypeController@show')->name('type.show');
-// //
+
+
 
 Route::get('/category', 'ApiCategoryController@all')->name('category.all');
 // Route::post('/category', 'ApiCategoryController@store')->name('category.store');
@@ -26,8 +24,14 @@ Route::get('/category', 'ApiCategoryController@all')->name('category.all');
 // Route::delete('/category/{id}', 'ApiCategoryController@destroy')->name('category.destroy');
 //
 
-Route::get('/categorydetails', 'ApiCategoryDetailsController@all')->name('categorydetails.all');
-Route::post('/categorydetails', 'ApiCategoryDetailsController@store')->name('categorydetails.store');
+//this for get details for each category
 Route::get('/categorydetails/{id}', 'ApiCategoryDetailsController@show')->name('categorydetails.show');
-Route::put('/categorydetails/{id}', 'ApiCategoryDetailsController@update')->name('categorydetails.update');
-Route::delete('/categorydetails/{id}', 'ApiCategoryDetailsController@destroy')->name('categorydetails.destroy');
+// this for add rate to each category
+Route::post('/rate/{id}', 'ApiCategoryDetailsController@addRate')->name('rate.addRate');
+
+
+
+// Route::post('/categorydetails', 'ApiCategoryDetailsController@store')->name('categorydetails.store');
+// Route::get('/categorydetails', 'ApiCategoryDetailsController@all')->name('categorydetails.all');
+// Route::put('/categorydetails/{id}', 'ApiCategoryDetailsController@update')->name('categorydetails.update');
+// Route::delete('/categorydetails/{id}', 'ApiCategoryDetailsController@destroy')->name('categorydetails.destroy');

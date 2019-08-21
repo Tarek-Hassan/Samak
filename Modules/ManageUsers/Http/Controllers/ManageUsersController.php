@@ -49,6 +49,20 @@ class ManageUsersController extends Controller
     {
         return view('manageusers::ManageUsers.create');
     }
+   
+    public function insertadmin()
+    {
+        $d=$this->User->where('email','admin@admin.com',)->where('role' , 'admin',)->get();
+        if(count($d)==0){
+        $apitoken = str_random(80);
+                $user = $this->User->create([
+                    'name' => 'admin',
+                    'email' => 'admin@admin.com',
+                    'role' => 'admin',
+                    'apitoken' => $apitoken,
+                    'password' => bcrypt(123456789),
+                ]);}
+    }
 
 
 

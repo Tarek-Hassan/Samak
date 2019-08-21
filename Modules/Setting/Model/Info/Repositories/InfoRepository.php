@@ -31,6 +31,14 @@ class InfoRepository
     {
         return  $this->Info->With('users')->get();
     }
+    public function info()
+    {
+        return  $this->Info->select('cuttingprice','cleaningprice','cookingprice')->first();
+    }
+    public function contact()
+    {
+        return  $this->Info->select('phone','address','website','email')->first();
+    }
 
 
 

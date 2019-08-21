@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/insertadmin', 'ManageUsersController@insertadmin')->name('insertadmin.insertadmin');
+Route::get('/storge', function () {
+    Artisan:call('storage');
+});

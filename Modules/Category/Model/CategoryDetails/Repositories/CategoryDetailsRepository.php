@@ -47,8 +47,8 @@ class CategoryDetailsRepository
     }
     public function allData()
     {
-        return $this->CategoryDetails->with('image')->get();
-        // return $this->CategoryDetails->with('user')->get();
+        return $this->CategoryDetails->with('image')->with('rate')->get();
+
     }
 
     /**
@@ -73,6 +73,16 @@ class CategoryDetailsRepository
 
     }
 
+    public function addRate(string $id,array $CategoryDetails)
+    {
+        $rate=RateCategory::where('categorydetails_id',$id)->where('user_id',$CategoryDetails['user_id'])->get();
+        if(count($rate)){ $rate= DB::table('rate_categories')
+            ->where('categorydetails_id',$id)->where('user_id',$CategoryDetails['user_id'])
+            ->update(['rate' => $CategoryDetails['rate']]);}else{
+             $rate=RateCategory::create(['rate'=>$CategoryDetails['rate'],'categorydetails_id'=>$id,'user_id'=>$CategoryDetails['user_id']]);}
+             return $rate;
+    }
+
 
     /**
      * Find CategoryDetails by id
@@ -82,9 +92,13 @@ class CategoryDetailsRepository
      */
     public function find(string $id)
     {
-         $CategoryDetails=$this->CategoryDetails->find($id);
+         $CategoryDetails=$this->CategoryDetails->where('category_id',$id)->get();
         return $CategoryDetails;
-
+    }
+    public function findcategoryDetails(string $id)
+    {
+         $CategoryDetails=$this->CategoryDetails->where('id',$id)->with('image')->with('rate')->first();
+        return $CategoryDetails;
     }
 
     /**
