@@ -24,6 +24,7 @@
                     </div>
                     <form class="m-login__form m-form" method="POST" action="{{ route('register') }}">
                         @csrf
+                            <input type="hidden" name="role" value="user">
                         <div class="form-group m-form__group">
                             <input class="form-control m-input @error('name') is-invalid @enderror" id="name"
                                 type="text" value="{{ old('name') }}" required autofocus placeholder="Fullname"
