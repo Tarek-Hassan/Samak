@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/insertadmin', 'ManageUsersController@insertadmin')->name('insertadmin.insertadmin');
 Route::get('/storge', function () {
     Artisan:call('storage');

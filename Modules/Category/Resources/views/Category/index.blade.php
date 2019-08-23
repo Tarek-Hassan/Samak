@@ -57,6 +57,7 @@
                                             {{$value->id}}
                                         </td>
                                         <td>
+                                       
                                             <img src="{{ asset('storage/'.$value->category_img) }}" id="flag"
                                                 style="width:50px;">
                                         </td>

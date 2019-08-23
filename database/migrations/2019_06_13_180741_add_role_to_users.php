@@ -15,7 +15,7 @@ class AddRoleToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('role')->defualt('user');
+            $table->string('role')->default('user');
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();

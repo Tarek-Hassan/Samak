@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="en" >
-	<!-- begin::Head -->
-	<head>
-		<meta charset="utf-8" />
-		<title>
-			@yield('title')
-		</title>
-		<meta name="description" content="Latest updates and statistic charts">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!--begin::Web font -->
-		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-		<script>
-          WebFont.load({
-            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-          });
-		</script>
-		<!--end::Web font -->
-        <!--begin::Base Styles -->
-        <!--begin::Page Vendors -->
-		<link href="{{asset('control')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Page Vendors -->
-		<link href="{{asset('control')}}/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="{{asset('control')}}/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Base Styles -->
-		<link rel="shortcut icon" href="{{asset('control')}}/assets/demo/default/media/img/logo/Icons-Land-Multiple-Smiley-Fish-Movie.ico" />
-
-
-		    @yield('styles')
-	</head>
-	<!-- end::Head -->
+@include('general::partial.admin.uphead')
     <!-- end::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
 		<!-- begin:: Page -->
@@ -63,14 +28,14 @@
 									</a>
 									<!-- END -->
 							<!-- BEGIN: Responsive Header Menu Toggler -->
-									<a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+									<!-- <a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
 										<span></span>
-									</a>
+									</a> -->
 									<!-- END -->
 			                <!-- BEGIN: Topbar Toggler -->
-									<a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+									<!-- <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
 										<i class="flaticon-more"></i>
-									</a>
+									</a> -->
 									<!-- BEGIN: Topbar Toggler -->
 								</div>
 							</div>
@@ -130,27 +95,7 @@
 		</div>
 		<!-- end::Scroll Top -->
 
-    	<!--begin::Base Scripts -->
-		<script src="{{asset('control')}}/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-		<script src="{{asset('control')}}/assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
-		<!--end::Base Scripts -->
-        <!--begin::Page Vendors -->
-		<script src="{{asset('control')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-		<!--end::Page Vendors -->
-        <!--begin::Page Snippets -->
-		<script src="{{asset('control')}}/assets/app/js/dashboard.js" type="text/javascript"></script>
-		<!--end::Page Snippets -->
-		<!-- begin::summernote -->
-		<script src="{{ asset('control') }}/form/summernote.js"></script>
-		<!-- end::summernote -->
-		<!-- begin::yajra table -->
-		<link rel="stylesheet" href="{{ asset('control') }}/assets/vendors/custom/datatables/datatables.bundle.css"/>
-    <link rel="stylesheet" href="{{ asset('control') }}/css/custom.css"/>
-		<!-- end::yajra table -->
-		<script src="{{ asset('control') }}/form/bootstrap-select.js"></script>
-		<script src="{{ asset('control') }}/form/select2.js"></script>
 
-		@yield('script')
-	</body>
-	<!-- end::Body -->
-</html>
+
+@include('general::partial.admin.upfoot')
+

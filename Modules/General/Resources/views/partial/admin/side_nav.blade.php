@@ -26,7 +26,7 @@
 					<span class="m-menu__link-text">
 						{{__('general.products')}}
 					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
+					<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 				</a>
 			</li>
 			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
@@ -35,7 +35,7 @@
 					<span class="m-menu__link-text">
 						{{__('general.productsDetalis')}}
 					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
+					<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 				</a>
 			</li>
             {{--@ tarek 8/7/2019 End:Category&&CategoryDetails MOdule--}}
@@ -103,7 +103,7 @@
 					<span class="m-menu__link-text">
 						ManageUsers
 					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
+					<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 				</a>
 
 			</li>
@@ -115,7 +115,7 @@
 					<span class="m-menu__link-text">
 						PaymentMethod
 					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
+					<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 				</a>
 
 			</li>
@@ -139,7 +139,7 @@
 					<span class="m-menu__link-text">
 						Order
 					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
+					<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 				</a>
 
 			</li>
@@ -153,7 +153,7 @@
 				<span class="m-menu__link-text">
 					Logout
 				</span>
-				<i class="m-menu__ver-arrow la la-angle-right"></i>
+				<!-- <i class="m-menu__ver-arrow la la-angle-right"></i> -->
 
 			</a>
 

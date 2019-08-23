@@ -35,3 +35,4 @@ Route::post('/rate/{id}', 'ApiCategoryDetailsController@addRate')->name('rate.ad
 // Route::get('/categorydetails', 'ApiCategoryDetailsController@all')->name('categorydetails.all');
 // Route::put('/categorydetails/{id}', 'ApiCategoryDetailsController@update')->name('categorydetails.update');
 // Route::delete('/categorydetails/{id}', 'ApiCategoryDetailsController@destroy')->name('categorydetails.destroy');
+

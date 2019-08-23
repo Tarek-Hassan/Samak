@@ -12,6 +12,8 @@
 */
 // Auth::routes();
 Route::group(['prefix' => '/','middleware' => ['auth',],],function() {
+
+    Route::get('/', 'GeneralController@index');
     Route::get('admin', 'GeneralController@index');
 });
 
