@@ -11,13 +11,15 @@
 |
 */
 
-// Route::middleware('auth:api')->get('/category', function (Request $request) {
-//     return $request->user();
-// });
+
+    Route::group(['prefix' => '/','middleware' => ['auth:api'],],function() {
+        Route::get('/categorydetails/{id}', 'ApiCategoryDetailsController@show')->name('categorydetails.show');
+        Route::get('/category', 'ApiCategoryController@all')->name('category.all');
+        Route::post('/rate/{id}', 'ApiCategoryDetailsController@addRate')->name('rate.addRate');
+    });
 
 
 
-Route::get('/category', 'ApiCategoryController@all')->name('category.all');
 // Route::post('/category', 'ApiCategoryController@store')->name('category.store');
 // Route::get('/category/{id}', 'ApiCategoryController@show')->name('category.show');
 // Route::put('/category/{id}', 'ApiCategoryController@update')->name('category.update');
@@ -25,9 +27,8 @@ Route::get('/category', 'ApiCategoryController@all')->name('category.all');
 //
 
 //this for get details for each category
-Route::get('/categorydetails/{id}', 'ApiCategoryDetailsController@show')->name('categorydetails.show');
+// Route::get('/categorydetails/{id}', 'ApiCategoryDetailsController@show')->name('categorydetails.show');
 // this for add rate to each category
-Route::post('/rate/{id}', 'ApiCategoryDetailsController@addRate')->name('rate.addRate');
 
 
 

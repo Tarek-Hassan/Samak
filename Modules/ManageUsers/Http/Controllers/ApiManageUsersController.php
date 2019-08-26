@@ -9,6 +9,7 @@ use Modules\ManageUsers\Model\ManageUsers\Repositories\ManageUsersRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Auth;
+use Carbon\Carbon;
 
 
 class ApiManageUsersController extends Controller
@@ -67,42 +68,46 @@ class ApiManageUsersController extends Controller
     }
 
 
-    public function Login()
+    public function Login(Request $request)
     {
         $url = url('/');
         $rules = [
-            'name' => 'required',
-            'password' => 'required',
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+            'remember_me' => 'boolean'
         ];
 
         $Validator = Validator::make(request()->all(), $rules);
+        $request['active'] = 1;
+        $request['deleted_at'] = null;
         if ($Validator->fails()) {
             return response()->json(['status' => false, 'messages' => $Validator->messages()]);
         } else {
 
-            if (filter_var(request('name'), FILTER_VALIDATE_EMAIL)) {
-                if (Auth::attempt(['email' => request('name'), 'password' => request('password') /* , 'active' => 1 */])) {
+            if (filter_var(request('email'), FILTER_VALIDATE_EMAIL)) {
+                if (Auth::attempt(['email' => request('email'), 'password' => request('password') /* , 'active' => 1 */])) {
                     $user = Auth::user();
-                    $user->apitoken = str_random(80);
-                    $user->save();
-
+                    $tokenResult = $user->createToken('Personal Access Token');
+                    $token = $tokenResult->token;
+                    if (request('remember_me'))
+            $token->expires_at = Carbon::now()->addWeeks(1);
+        $token->save();
                     $userinfo =$Users= $this->User->find($user->id);
+                    return response()->json([
+                        'user' => $userinfo,
+                        'access_token' => $tokenResult->accessToken,
+                        // 'token_type' => 'Bearer',
+                        'expires_at' => Carbon::parse(
+                            $tokenResult->token->expires_at
+                        )->toDateTimeString()
+                    ]);
+                    // return response(['status' => true, 'user' => $userinfo, 'token' => $user->apitoken]);
 
-                    return response(['status' => true, 'user' => $userinfo, 'token' => $user->apitoken]);
-                } else {
-                    return response(['status' => false, 'message' => 'Username Or Password Incorrect']);
-                }
-            } else {
-                if (Auth::attempt(['name' => request('name'), 'password' => request('password') /* , 'active' => 1 */])) {
-                    $user = Auth::user();
-                    $user->apitoken = str_random(80);
-                    $user->save();
-                    $userinfo =$Users= $this->User->find($user->id);
-                    return response(['status' => true, 'user' => $userinfo, 'token' => $user->apitoken]);
                 } else {
                     return response(['status' => false, 'message' => 'Username Or Password Incorrect']);
                 }
             }
+
         }
     }
     /**
@@ -124,7 +129,7 @@ class ApiManageUsersController extends Controller
             return response()->json(['status' => false, 'messages' => $Validator->messages()]);
         } else {
             try {
-                $apitoken = str_random(80);
+                // $apitoken = str_random(80);
                 $user = $this->User->create([
                     'name' => request('name'),
                     'email' => request('email'),
@@ -133,12 +138,13 @@ class ApiManageUsersController extends Controller
                     'phone' => request('phone'),
                     'street' => request('street'),
                     'avatar' => request('avatar'),
-                    'apitoken' => $apitoken,
+                    'activation_token' => str_random(60),
                     'password' => bcrypt(request('password')),
                 ]);
                 $url = url('/');
+                $user->notify(new SignupActivate($user));
                 $userinfo= $this->User->find($user->id);
-                return response(['status' => true, 'user' => $userinfo, 'token' => $apitoken]);
+                return response(['status' => true, 'user' => $userinfo]);
             } catch (Exception $ex) {
                 return response()->json(['status' => false, 'messages' => 'Invalid Information']);
             }
@@ -149,6 +155,19 @@ class ApiManageUsersController extends Controller
      * @param int $id
      * @return Response
      */
+    public function signupActivate($token)
+{
+    $user =  $this->User->where('activation_token', $token)->first();
+    if (!$user) {
+        return response()->json([
+            'message' => 'This activation token is invalid.'
+        ], 404);
+    }
+    $user->active = true;
+    $user->activation_token = '';
+    $user->save();
+    return $user;
+}
     public function show($id)
     {
 

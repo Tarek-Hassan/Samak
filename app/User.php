@@ -6,13 +6,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use QCod\ImageUp\HasImageUploads;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasImageUploads;
 
 
-    use Notifiable;
+    use Notifiable,HasApiTokens,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','apitoken', 'role', 'country', 'city', 'street','phone'
+        'name', 'email', 'password', 'role', 'country', 'city', 'street','phone','active', 'activation_token'
     ];
     protected static $imageFields = [
         'avatar',
@@ -32,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','activation_token'
     ];
 
     /**

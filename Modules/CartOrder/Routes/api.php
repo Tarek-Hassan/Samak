@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/cartorder', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => '/','middleware' => ['auth:api'],],function() {
+   
+    // id=> for the user get all products for each user
+    Route::get('/mycart/{id}', 'ApiCartController@all')->name('cart.all');
+    // id=> for the categorydetails->id
+    Route::get('/cart/{id}', 'ApiCartController@show')->name('cart.show');
+    Route::post('/cart/{id}', 'ApiCartController@store')->name('cart.store');
 });
-// id=> for the user get all products for each user
-Route::get('/mycart/{id}', 'ApiCartController@all')->name('cart.all');
-// id=> for the categorydetails->id
-Route::get('/cart/{id}', 'ApiCartController@show')->name('cart.show');
-Route::post('/cart/{id}', 'ApiCartController@store')->name('cart.store');
 // Route::put('/category/{id}', 'ApiCartOrderController@update')->name('category.update');
 // Route::delete('/category/{id}', 'ApiCartOrderController@destroy')->name('category.destroy');
 

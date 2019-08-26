@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/paymentmethod', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => '/','middleware' => ['auth:api'],],function() {
+
+    Route::get('/paymentmethod', 'ApiPaymentMethodController@all')->name('paymentmethod.all');
 });
-Route::get('/paymentmethod', 'ApiPaymentMethodController@all')->name('paymentmethod.all');
